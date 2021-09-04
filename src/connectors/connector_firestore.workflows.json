@@ -30,6 +30,9 @@
             },
             "fieldB": {
               "integerValue": 123
+            },
+            "field-C": {
+              "booleanValue": true
             }
           }
         }
@@ -49,7 +52,7 @@
     "check": {
       "switch": [
         {
-          "condition": "${got.fields.fieldA.stringValue == \"abc\" AND int(got.fields.fieldB.integerValue) == 123}",
+          "condition": "${got.fields.fieldA.stringValue == \"abc\" AND int(got.fields.fieldB.integerValue) == 123 AND got.fields[\"field-C\"].booleanValue == True}",
           "next": "export"
         }
       ]
@@ -57,7 +60,7 @@
   },
   {
     "failed": {
-      "raise": "${\"got unexpected document\" + \"fieldA:\" + got.fields.fieldA.stringValue + \" fieldB:\" + string(got.fields.fieldB.integerValue)}"
+      "raise": "${\"got unexpected document\" + \"fieldA:\" + got.fields.fieldA.stringValue + \" fieldB:\" + string(got.fields.fieldB.integerValue) + \" field-C:\" + got.fields[\"field-C\"].booleanValue}"
     }
   },
   {
